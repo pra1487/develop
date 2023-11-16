@@ -15,3 +15,6 @@ def sq_li(x):
     return res_li
 
 print(sq_li(l))
+
+res = [[int(math.pow(j,2)) for j in i] for i in l]
+print(res)
