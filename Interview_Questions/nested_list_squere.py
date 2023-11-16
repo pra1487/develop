@@ -16,5 +16,7 @@ def sq_li(x):
 
 print(sq_li(l))
 
+# list comprehensing method.
+
 res = [[int(math.pow(j,2)) for j in i] for i in l]
 print(res)
