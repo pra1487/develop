@@ -1,0 +1,69 @@
+class sample:  # class name "sample"
+    x = 10 # static variable
+
+    def m1(self):
+        print(sample.x) # Accessing the sv with in the method using class
+# End of the class
+
+print(f"x = {sample.x}") # Accessing the SV out side the class with class
+
+# SV are defined outside the methods but they can be accessed by all the methods.
+
+====================
+
+class sample:
+    x = 10
+    y = 20 # Static variables
+    print(x,y)
+
+    def display(self): # whichever object calls this method then the object address stored by self
+        print(sample.x)
+        print(sample.y) # Accessing SVs using the class in method
+    def show(self):
+        print(sample.x)
+        print(sample.y) # using SVs in all the methods
+
+# syntax for creating an object.
+# object = classname()
+
+obj1 = sample() # object creation statement. and obj1 address stored in address of self.
+print("method calling")
+obj1.display() # method calling with object. 
+
+print(sample.x, sample.y) # Accessing SVs from outside the class.
+
+=================================
+
+# Defining multiple methods with in the class
+# Modifying the values of SVs using a method.
+
+class test:
+    """sample class"""
+    x = 10
+    y = 11 # SVs
+
+    def m1(self):
+        print(test.x) # Accessing SVs in module1
+        print(test.y)
+        #modifying rhe SVs with method
+        test.x = 20
+        test.y = 21 # these changes are affecting in other methods also
+
+    def m2(self):
+        print(test.x)
+        print(test.y) # Accessing SVs in another module
+
+obj1 = test() # object creation
+
+obj1.m2() # calling module2 with object
+obj1.m1() # calling module with object
+obj1.m2() # calling module with object
+
+test.x = 30 # Modifying the SVs from out side the class.
+test.y = 31
+
+print(test.x,test.y)
+
+obj1.m2()
+obj1.m1()
+obj1.m2()

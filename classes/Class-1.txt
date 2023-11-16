@@ -1,0 +1,50 @@
+# Syntax of class
+
+class classname:
+    """doc string"""
+    variables
+    ...........
+    ...........
+    methods
+    .......
+
+#doc string = what is the class meant for
+
+#object : which means it is an instance of class.
+
+# syntax for object:
+
+objectname = classname()
+
+class is collection of similar objects
+we can create n number of objects with a class.
+
+#ex:
+
+class employee:
+    """ employee class """
+    eid = input(....)
+    ename = input(....)
+    sal = input(....)
+    desig = input(...)
+    company = input(...)
+    company_address = (...)
+# end of the class
+# creating objects with the above class
+
+emp1 = employee()
+emp2 = employee()
+emp3 = employee()
+
+
+Function:
+    1. function always defined outside the class
+    2. function does not have self argument
+    3. function called normally using functioncall
+        ex: display()
+method:
+    1.method always defining with in the class
+    2.method should have self argument always
+    3.method always called using object.
+        ex: emp1.display()
+

@@ -1,0 +1,148 @@
+NSV:
+====
+
+# Non-stataic variables: The variables which are declared by using the name self are known as NSVs.
+# or called as instance variables
+
+# ex: self.x = 10
+
+# NSVs are always defined with in the method.
+
+class sample:
+    a = 10
+    b = 20 # static variables
+
+    def display(self):
+        self.x = 30
+        self.y = 40
+        print(f"a = {sample.a}")
+        print(f"b = {sample.b}")
+        print("x = {}".format(self.x))
+        print("y = {}".format(self.y))
+
+# End of the class
+
+obj1 = sample()
+
+# Accessing static variables from outside the class
+print("a",sample.a)
+print("b",sample.b)
+print("method calling")
+obj1.display()
+
+# Accessing NSVs from outside the class.
+print("Accessing NSVs")
+print(f"x = {obj1.x}")
+print(f"y = {obj1.y}")
+
+        
+
+==========================================================
+
+class emp:
+    company = "Cognizant"    # SV
+
+    def getdetails(self):
+        self.ename = input("Enter Emp Name: ")
+        self.eid = int(input("Enter Emp ID: "))
+        self.esal = int(input("Enter EMP sal: "))
+        self.desig = input("Enter Emp Desig: ")     # NSVs
+        print(self)
+    def putdetails(self):
+        print(f"Ename: {self.ename}")
+        print(f"EID: {self.eid}")
+        print(f"Esal: {self.esal}")
+        print(f"Desig: {self.desig}")
+        print(f"company: {emp.company}")   
+        print(self)
+
+# End of the class
+
+E1 = emp()
+print(E1)
+E1.getdetails()
+        
+E1.putdetails()
+
+=====================================
+
+class sample:
+    a = 1.5
+    b = 2.6   # static variables
+
+    def display(self):
+        self.x = 10
+        self.y = 20  # NSVs
+        print(f"x : {self.x}")
+        print(f"y : {self.y}")
+        print(f"a : {sample.a}")
+        print(f"b : {sample.b}")
+
+        # modifying the values
+
+        self.x = self.x+50
+        self.y = self.y+60
+        sample.a = sample.a+70
+        sample.b = sample.b+80
+        print(f"x : {self.x}")
+        print(f"y : {self.y}")
+        print(f"a : {sample.a}")
+        print(f"b : {sample.b}")
+
+# End of the class
+
+obj1 = sample()
+print(obj1)
+print("first obj1")
+obj1.display()
+print("second obj2")
+
+obj2 = sample()
+obj2.display()
+
+Note:
+====
+# For Non-static variables values will be re-initialized for evry object.
+# But for static variables it takes the old modified values only, here object to object it wont be change.
+
+
+===============================
+
+class customer:
+    bank = "SBI"  # SV
+
+    def getdetails(self):
+        self.cname = input("Enter customer name: ")
+        self.accno = int(input("Enter Acc No: "))
+        self.address = input("Enter address: ")
+        self.balance = int(input("Enter balance: ")) # NSVs
+    def putdetails(self):
+        print(f"Customer Name: {self.cname}")
+        print(f"Account No: {self.accno}")
+        print(f"Address: {self.address}")
+        print(f"Balance: {self.balance}")
+        print(f"Bank name: {customer.bank}")
+    def deposit(self):
+        self.damount = int(input("Enter deposit amount: ")) # NSV
+        self.totalamount = self.damount+self.balance  # NSV
+        print(f"Total amount : {self.totalamount}")
+    def withdraw(self):
+        self.wamount = int(input("enter withdraw amount: ")) # NSV
+        self.totalamount = self.totalamount-self.wamount
+        print(f"Total amount : {self.totalamount}")
+
+# End of the class
+
+c1 = customer() # object creation
+c1.getdetails()
+c1.putdetails()
+c1.deposit()
+#c1.withdraw()
+print(f"Totalamount: {c1.totalamount}")
+
+print(c1.wamount) # this will thown an error because without executing the c1.withdraw()
+# the values will not be assign to that NSVs which are inside that module.
+# To overcome this, allocate value for NSVs during the object creation only
+# using constructors
+
+============================================

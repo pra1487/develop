@@ -1,0 +1,17 @@
+Modules:
+=========
+- Every python program by default is a module.
+
+- A Module consists of 
+	1.Executable statements
+	2.Global variables
+	3.Functions
+	4.Classes
+
+main module: If we execute any module, by default it is main module.
+------------
+we can import the properties of one module to another module using import statement.
+
+Sub Module: If a module imported in another module, then the imported module is called as sub-module.
+-----------
+

@@ -1,0 +1,226 @@
+Generally, There are 2 types of errors in python.
+1. Syntax Errors
+2. Run-time Errors
+
+1.Syntax errors: The errors that occur due to wrong syntaxes.
+================
+ex: wrong space indentation.
+	missing colons
+	missing brackets
+	missing quotes..etc
+
+Generally, Python interpretor checks for syntax errors and then converts source code to byte code(.pyc)
+and then converts this byte code to machine code and finally executes.
+
+If there are syntax errors, then .pyc file wont be generated.
+if .pyc file not generated then the python program wont be executed.
+
+
+2.Run time errors:
+==================
+Syntatically correct but during the execution these will thrown an errors.
+for every run time error, corresponding pre-defined python class is available these are called as Exception classes.
+
+There is a module consists all the exception classes which is __builtins__
+without importing we can use this module properties.
+
+print(dir(__builtins__))
+ 
+x = [10,20,30,40,50]
+
+#print(x[9]) #IndexError: list index out of range
+
+#x.remove(90) #ValueError: list.remove(x): x not in list
+
+#print("hello"+3) #TypeError: can only concatenate str (not "int") to str
+
+#print(y) #NameError: name 'y' is not defined
+
+#print(10/0) #ZeroDivisionError: division by zero
+
+#y = list(10) #TypeError: 'int' object is not iterable
+
+#y = list("python","language") #TypeError: list expected at most 1 argument, got 2
+
+#f = open('sample5.txt','r') #FileNotFoundError: [Errno 2] No such file or directory: 'sample5.txt'
+
+#x = int(input("enter x value here:")) #ValueError: invalid literal for int() with base 10: 'hello'
+
+When ever we get run time error the program execution will terminate abnormally.
+
+These exceptions are classes which contain run-time error representations.
+
+whenever we get run-time error, run-time error representation class object will be created automatically.
+whenever this object is created, we say that exception is raised, we need to handle it with a code. otherwise abnormal termination.
+
+Exception Handeling: The process of identifying raised exception object and handeling it by assigning that exception to the corresponding run-time error representation class is known as exception handeling.
+
+we can implement exception handeling in python using "try" and "except" block.
+we need to follow indentation for both try and except blocks.
+
+ex1: (try-except)
+====
+
+x = int(input("enter x value:"))
+y = int(input("enter y value:"))
+
+try:
+    z=x/y
+    print(z)
+except(ZeroDivisionError):
+    print("can not enter y value as 0")
+
+
+ex2:(try-except-except)
+====
+
+try:
+    x = int(input("enter x value:"))
+    y = int(input("enter y value:"))
+    z=x/y
+    print(z)
+    print(w)
+except(ZeroDivisionError):
+    print("can not enter y value as 0")
+except(ValueError):
+    print("enterings should be numerical only")
+except(NameError):
+    print("Varible is not defined")
+except:
+    print("error occured")
+
+ex3: (try-except-else)
+====
+if no exception in try block then only control will goes to else block.
+
+try:
+    f=open("d:/data/test_data.txt","r")
+    print(f.read())
+    f.close()
+except(FileNotFoundError):
+    print("File not found in the given path")
+except():
+    print("Error")
+else:
+    print("file opened successfully")
+print("End")
+
+ex4:
+====
+
+try:
+    x=(12,13,14,15)
+    x.append(16)
+    x[2]=22
+
+except(AttributeError):
+    print("Tuple does not support append")
+except(TypeError):
+    print("Tuple elements can not be modified")
+except:
+    print("Error")
+else:
+    print("completed")
+
+
+nested:
+=======
+
+try:
+    print("in try1...")
+    try:
+        print("try2 in try 1...")
+    except:
+        print("except1 in try1...")
+    finally:
+        print("finally1 in try 1")
+except:
+    print("in except1...")
+    try:
+        print("try in except1")
+    except:
+        print("except in except1")
+    finally:
+        print("finally in except1")
+finally:
+    print("in finally1...")
+    try:
+        print("try in finally1")
+    except:
+        print("except in finally1")
+    finally:
+        print("finally in finally1")
+
+
+raise:
+======
+
+try:
+    age = int(input("enter age here:"))
+    if (age<18):
+        raise ValueError
+    else:
+        print("Eligible to Voter ID")
+except ValueError:
+    print("The age is less, not eligible for vote")
+    
+ex2:
+====
+
+try:
+    a = int(input("enter a value: "))
+    b = int(input("enter b value: "))
+
+    if (b==0):
+        raise ZeroDivisionError
+    else:
+        print("a/b = {}".format(a/b))
+except(ValueError):
+    print("Enter Numericals only")
+except(ZeroDivisionError):
+    print("b value should not be 0")
+
+finally:
+    try:
+        print("a={}".format(a))
+        print("b={}".format(b))
+    except:
+        print("Invalid input")
+
+
+ex3:
+====
+try:
+    marks = int(input("Enter the marks:"))
+    if (marks>100):
+        raise ValueError
+except ValueError:
+    print("{} is out of range".format(marks))
+else:
+    print("marks: {}".format(marks))
+
+
+ex4:
+====
+try:
+    f=None
+    f=open("d:/data/test11_data.txt","r")
+    if (f!=None):
+        print("File opened successfully")
+        print(f.read())
+    else:
+        raise FileNotFoundError
+except FileNotFoundError:
+    print("file does not found in the path")
+except:
+    print("Error")
+finally:
+    if (f!=None):
+        f.close()
+        print("file opned and closed successfully")
+    else:
+        print("file not opened")
+        
+
+        
+

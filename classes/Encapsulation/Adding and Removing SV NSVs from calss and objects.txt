@@ -1,0 +1,72 @@
+# Adding attributes to a class and adding attributes to a object
+# Adding static and non-static variables to the class and object explicitly.
+
+# Adding static variables to the class explicitly
+# Adding non-static variables to the object explicitly.
+
+class sample:
+    a = 10 #sv
+
+    def display(self): # method
+        self.b = 20  # NSV
+
+obj1 = sample() # object creation
+obj1.display()
+
+# Accessing SV from out side the class
+print(f"a(sv) = {sample.a}")
+
+# Adding a new static variable c to the class
+sample.c = 30
+print(f"c(SV) = {sample.c}")
+
+# Accessing NSV from outside the class with the help of obj
+print(f"b(nsv) = {obj1.b}")
+
+# Adding a new NSV from outside the class with object.
+
+obj1.d = 40
+print(f"d(nsv) = {obj1.d}")
+
+
+# creating another object
+
+obj2 = sample()
+obj2.display()
+print("b=",obj2.b)
+#print("d=",obj2.d)  # Invalid because NSV d has been added to obj1 only.
+
+
+# Removing attributes from class.
+
+# Removing SV a from calss
+del sample.a
+#print("a=",sample.a)
+
+
+# Removing a NSV b from the object obj1
+del obj1.b
+#print("b=",obj1.b)
+
+# Here del keyword can remove only sv and nsv but can not remove objects.
+
+# del: del keyword which is used to decrease the reference count of an object.
+# Reference Count: No of variables pointing to an object will give the reference count.
+# or No of variables storing the address of an object will give the reference count.
+
+# ex:
+'''
+x = 10
+y = 10
+z = 10
+
+How many objects will create.? =  one object
+x,y,z are storing the address of same object (10) so reference count = 3
+
+# Whenever any objecr reference count is zero that object will automatically removed
+by the garbage collector.
+# Whenever object gets removed, then destructor called.
+
+'''
+
+

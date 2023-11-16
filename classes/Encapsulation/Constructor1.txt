@@ -1,0 +1,332 @@
+class student:
+    def __init__(self):
+        self.sname = input("Enter student name: ")
+        self.rollno = int(input("Enter roll no: "))
+        self.branch = input("enter branch name: ")
+        self.rank = int(input("enter rank: "))
+
+    def display(self):
+        print(f"Name: {self.sname}")
+        print(f"Roll NO: {self.rollno}")
+        print(f"Branch Name: {self.branch}")
+        print(f"Student Rank: {self.rank}")
+# End of the class
+
+print("Enter student1 details")
+s1 = student() # objet creating and cons got execued automatically
+print(s1.sname)
+
+s1.display()  # calling method/ executing method
+
+print("Enter student2 details")
+s2 = student() # Obj2 creating and cons executed again
+print(s2.sname)
+
+s2.display()
+print("===== End ====")
+
+======================================
+
+# Program to find out the volume of t he cube
+
+class cube:
+    def __init__(self):
+        self.length = int(input("Enter cube len: "))
+        self.breadth = int(input("Enter cube breadth: "))
+        self.height = int(input("Enter cube height: "))
+    def compute(self):
+        self.volume = self.length*self.breadth*self.height
+        print(f"Volume of Cube is : {self.volume}")
+# End of the class
+
+c1 = cube() # object cube creation and con executed automatically
+print(c1.length)
+print(c1.height)
+print(c1.breadth)
+print("\n calulating...")
+c1.compute()
+
+====================================
+
+# drawback of default constructor is to assign the default values for every object.
+# but initially want to assign 10, 20 for s1 and 30, 40 for s2 then go with parameterized constructor
+
+#ex:
+
+class sample:
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+
+s1 = sample()
+print(s1.x)
+print(s1.y)
+s1.x = 10
+s1.y = 20
+print(s1.x)
+print(s1.y)
+print("\n\n")
+
+s2 = sample()
+print(s2.x)
+print(s2.y)
+s2.x = 30
+s2.y = 40
+print(s2.x)
+print(s2.y)
+
+
+=========================
+
+# Parameterized constructor:
+# A constructor with parameters is called parametarized constructor
+
+#ex:
+
+class test:
+    def __init__(self,a,b):
+        self.x = a
+        self.y = b
+
+    def m1(self, p,q):
+        r = p+q
+        s = self.x+self.y
+        print(f"r = {r}")
+        print(f"s = {s}")
+
+t1 = test(10,20) # passing parameters while creating objects.
+print(t1.x)
+print(t1.y)
+
+t1.m1(20,30)
+
+t2 = test(25,35)
+print(t2.x)
+print(t2.y)
+
+t2.m1(25,35)
+
+==========================================
+
+# Python doesnot support method oveloading and constructor overloading.
+
+# Defining two or more methods or constructor with same name but
+# diff no of arguments is called as method overloading or constructor overloading.
+
+class test:
+    def __init__(self):
+        self.a = 10
+        self.b = 20
+        print(f"a = {self.a}")
+        print(f"b = {self.b}")
+
+    def __init__(self,x,y):
+        self.p = x
+        self.q = y
+    def display(self):
+        print(f"x = {self.p}")
+        print(f"a = {self.a}")
+
+t1 = test(10,20)
+
+==========================
+
+# Parameterized constructor: A constructor with parameters.
+# Note: In parameterized constructor, how many non-static variables to be initialized
+#       those many arguments must need to provide in constructor.
+
+class student:
+    def __init__(self,Name,Age):
+        self.sname = Name
+        self.sage = Age
+        #self.display()
+
+    def display(self):
+        print(f"Student name: {self.sname}")
+        print(f"Student age: {self.sage}")
+
+s1 = student("prasad",35)
+s1.display()
+
+==================================================
+
+class customer:
+    """Bank customer application"""
+    bank_name = "SBI"  # SV
+
+    def __init__(self,cname,caccno,caddr,cbal):
+    # number of parameters should be equals to no of NSVs
+        self.custname = cname
+        self.accno = caccno
+        self.addr = caddr
+        self.bal = cbal
+
+    #operations
+    def deposit(self,depo):
+        self.depo = depo
+        self.bal = self.bal+self.depo
+        print(f"balance after deposit {self.depo} : {self.bal}")
+    def withdraw(self, wdr):
+        self.wdr = wdr
+        self.bal = self.bal-self.wdr
+        print(f"balance after withdrwa {self.wdr}: {self.bal}")
+
+    def balenq(self):
+        print(f"Balance : {self.bal}")
+
+    def display(self):
+        print(f"Customer name: {self.custname}")
+        print(f"Account no: {self.accno}")
+        print(f"Address: {self.addr}")
+        print(f"balance: {self.bal}")
+
+# End of the class.
+
+c1 = customer("kohli",1024,"Delhi",150000)
+c1.withdraw(15000)
+c1.deposit(10000)
+
+===================================================
+
+class customer:
+    """Bank customer application"""
+    bank_name = "SBI"  # SV
+
+    def __init__(self,cname,caccno,caddr,cbal):
+    # number of parameters should be equals to no of NSVs
+        self.custname = cname
+        self.accno = caccno
+        self.addr = caddr
+        self.bal = cbal
+
+    #operations
+    def deposit(self,depo):
+        self.depo = depo
+        self.bal = self.bal+self.depo
+        print(f"balance after deposit {self.depo} : {self.bal}")
+    def withdraw(self, wdr):
+        self.wdr = wdr
+        self.bal = self.bal-self.wdr
+        print(f"balance after withdrwa {self.wdr}: {self.bal}")
+
+    def balenq(self):
+        print(f"Balance : {self.bal}")
+
+    def display(self):
+        print(f"Customer name: {self.custname}")
+        print(f"Account no: {self.accno}")
+        print(f"Address: {self.addr}")
+        print(f"balance: {self.bal}")
+
+# End of the class.
+
+cname = input("Enter the customer name: ")
+caccno = int(input("Enter account no: "))
+caddr = input("Enter address : ")
+
+c1 = customer(cname,caccno,caddr, 30000)  # Dynamically accepting customer details.
+c1.deposit(2000)
+==========================
+
+# Arbitrary Arguments
+
+class sample:
+    def __init__(self, *x, **y):
+        self.x = x
+        self.y = y
+        print(f"x = {self.x}, {type(self.x)}")
+        print(f"y = {self.y}, {type(self.y)}")
+
+s1 = sample(10,20,30, cname="Virat", age=35)
+
+====================================================
+
+class employee:
+    """Employe Application"""
+    company = "cognizant"
+    empcount = 0
+
+    def __init__(self,empname,empid,empsal,design="SE",*languages,**details):
+        self.empname = empname
+        self.empid = empid
+        self.empsal = empsal
+        self.design = design
+        self.languages = languages
+        self.details = details
+        employee.empcount = employee.empcount+1
+
+    def display(self):
+        print(f"Name: {self.empname}, ID: {self.empid}, SAL: {self.empsal},DESIGNATION: {self.design},LANG: {self.languages}, details:{self.details}")
+# End of class
+
+emp1 = employee("Arjun",101,30000,"Associate", "Emglish", "Hindi", age=35,blgrp="O+ve")
+emp2 = employee("Virat",102,40000,"Batsman","Eng","Hin",age=36,colour="white")
+emp3 = employee("Prabhu",103,50000,"TECHL","Eng","Tamil",age=40,coll="JANTU")
+
+#emp1.display()
+#emp2.display()
+#emp2.display()
+
+print(f"Total No of employees are {employee.empcount}")
+print(f"Company name: {employee.company}")
+
+print("Prining the Emp details here: \n")
+x = [emp1,emp2,emp3]
+
+for i in x:
+    print(i.display())
+
+
+
+    
+=================================================
+
+# Employee application to perform various operations such as
+# DA, TA, HRA, PF, TAX
+
+class employee:
+    """Employee salary Application"""
+
+    company = "cognizant"
+    empcount = 0
+
+    def __init__(self,empname,empid,empsal,empdes):
+        #Number NSVs should be equals to number of arguments.
+        self.empname = empname
+        self.empid = empid
+        self.empsal = empsal
+        self.empdes = empdes
+        employee.empcount += 1
+
+        #operations
+    def DA(self, daamt):
+        self.empsal = self.empsal+daamt
+    def hra(self, hraamt):
+        self.empsal = self.empsal+hraamt
+    def ta(self,taamt):
+        self.empsal = self.empsal-taamt
+    def pf(self,pfamt):
+        self.empsal = self.empsal-pfamt
+    def tax(self):
+        if ((self.empsal>250000) and (self.empsal<=500000)):
+            self.empsal=self.empsal-(self.empsal*0.10)
+            print(f"Salary after the tax deduction: {self.empsal}")
+        elif((self.empsal>500000) and (self.empsal<=1000000)):
+            self.empsal=self.empsal-(self.empsal*0.30)
+            print(f"Salary after tax deduction: {self.empsal}")
+        elif(self.empsal > 1000000):
+            self.empsal = self.empsal-(self.empsal*0.20)
+            print(f"Salary after tax deduction: {self.empsal}")
+    def display(self):
+        print(f"Name: {self.empname}, ID: {self.empid}, Salary: {self.empsal}, Designation: {self.empdes}")
+
+E1 = employee("Virat",101,1500000,"Batsman")
+E1.DA(15000)
+E1.hra(10000)
+E1.ta(20000)
+E1.pf(10000)
+E1.tax()
+E1.display()
+=========================================================
+            
+    

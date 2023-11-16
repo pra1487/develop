@@ -1,0 +1,38 @@
+local, global, static variables:
+=================================
+
+# Working with static, local and static variables
+
+# global variables ----------> defining out side the class
+# local variables -----------> defining inside the class and within the method
+# static variables ----------> defining within the class but out side the method
+
+r = 30 # global variable
+
+class demo:
+    x = 10
+    y = 20  # Static variables
+    print(x)
+    print(y)
+    print(r)
+
+    def compute(self,p,q):
+        #modifying a global variable
+        global r  # forward decleration
+        r = 40
+        z = p+q+r   #p,q,r are the local variables and z is sum of the local and global variables
+        w = demo.x+demo.y # sum of the static variables
+        print(f"z = {z}")
+        print(f"w = {w}")
+        print(f"r = {r}")
+
+# End of the class
+
+obj1 = demo()  # object creation
+obj1.compute(10,50)
+print(r)
+#print(p,q,z,w) #local variables
+print(demo.x,demo.y)
+        
+    
+===========================================

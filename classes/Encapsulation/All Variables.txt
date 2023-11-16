@@ -1,0 +1,26 @@
+# All variables in one program
+
+x = 10 # Global variable
+
+class test:
+    y = 20 # static variable
+
+    def display(self,p): # local variable
+        self.z = p    # NSV
+        self.w = x+test.y+self.z+p
+        print(f"Global variable x: {x}")
+        print(f"Static Variable y: {test.y}")
+        print(f"Local variable: {p}")
+        print(f"NSV z : {self.z}")
+        print(f"NSV w: {self.w}")
+
+# End of the class
+
+t1 = test()  # object creating
+t1.display(30)
+print(x)
+print(test.y)
+print(t1.z)
+print(t1.w)
+print(p) # we can not be access local variable from out side the method.
+

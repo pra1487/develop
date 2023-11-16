@@ -1,0 +1,22 @@
+# Destructor __del__()
+# when ever object created constructor (__init__()) will execute
+# when ever object removed destructor (__del__()) will execute.
+
+class test:
+    def __init__(self):
+        print("Constrctir called")
+    def __del__(self):
+        print("Destructor called")
+
+t1 = test()
+t2 = test()
+t3 = test()
+print(t3)
+
+t3 = test()
+# if same reference variable is used,then RC of previous t3 decrease by 1
+# RC = 0 if same variable is used, RC becomes less i.e = 0
+# previous t3 object is removed and destructor executed.
+# and a new t3 object is created with a new address.
+
+print(t3)
