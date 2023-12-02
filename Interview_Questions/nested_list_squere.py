@@ -3,6 +3,8 @@ l = [[1,2,3],[4,5,6],[7,8,9]]
 import math
 
 def sq_li(x):
+    """Nested list functions"""
+
     res_li = []
 
     for i in x:

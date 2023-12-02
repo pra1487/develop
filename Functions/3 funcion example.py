@@ -9,3 +9,5 @@ def compute():
     print(f"Simple ineterest is: {si} ")
 
 compute()
+
+""" End of the function"""
