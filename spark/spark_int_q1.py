@@ -17,5 +17,13 @@ schema1 = ['col1', 'col2', 'col3']
 df = spark.createDataFrame(data, schema=schema1)
 df.show(truncate=False)
 
-final_df = df.groupby('col1', 'col2').agg(collect_list('col3')).alias('col3')
+print('dataFrame')
+final_df = df.groupby('col1', 'col2').agg(collect_list('col3')).alias('result_col')
 final_df.show()
+
+# in spark.sql
+
+df.createOrReplaceTempView("df")
+print("spark.sql")
+final_df_sql = spark.sql("select col1, col2, collect_list(col3) as result_col from df group by col1, col2")
+final_df_sql.show()
