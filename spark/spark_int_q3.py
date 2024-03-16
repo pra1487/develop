@@ -15,6 +15,15 @@ df.show(truncate=False)
 df_all_null_rmv = df.na.drop() # dropping all null.
 df_all_null_rmv.show()
 
+df_drop_any = df.na.drop(how='any')
+df_drop_any.show()
+
+df_drop_thresh = df.na.drop(how='any', thresh=2)
+df_drop_thresh.show()
+
+df_drop_subset = df.na.drop(how='any', subset=['Experience'])
+df_drop_subset.show()
+
 
 
 
