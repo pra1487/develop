@@ -18,7 +18,7 @@ df = spark.createDataFrame(data, schema=schema1)
 df.show(truncate=False)
 
 print('dataFrame')
-final_df = df.groupby('col1', 'col2').agg(collect_list('col3')).alias('result_col')
+final_df = df.groupby('col1', 'col2').agg(collect_list('col3').alias('result_col'))
 final_df.show()
 
 # in spark.sql
