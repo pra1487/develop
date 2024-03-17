@@ -36,3 +36,50 @@ group_df_df1.show()
 group_df_df2 = df.agg(sum(col('Salary')).alias('Total_Salary'))
 group_df_df2.show()
 
+'''
+
+data = [
+    (("James","","Smith"),["Java","Scala","C++"],"OH","M"),
+    (("Anna","Rose",""),["Spark","Java","C++"],"NY","F"),
+    (("Julia","","Williams"),["CSharp","VB"],"OH","F"),
+    (("Maria","Anne","Jones"),["CSharp","VB"],"NY","M"),
+    (("Jen","Mary","Brown"),["CSharp","VB"],"NY","M"),
+    (("Mike","Mary","Williams"),["Python","VB"],"OH","M")
+ ]
+
+schema = StructType([
+    StructField('name', StructType([
+        StructField('first_name', StringType(), True),
+        StructField('middle_name', StringType(), True),
+        StructField('last_name', StringType(), True)
+    ])),
+    StructField('languanges', ArrayType(StringType()), True),
+    StructField('State', StringType(), True),
+    StructField('Gender', StringType(),True)
+
+])
+
+df = spark.createDataFrame(data, schema=schema)
+df.show()
+
+array_filter = df.filter(array_contains(col('languanges'), 'Spark'))
+array_filter.show()
+
+df1 = df.withColumn('lang_count', size(split(concat_ws(',', 'languanges'), ',')))
+df1.show()
+
+df1 = df.filter(col('Gender')!='M').filter(col('State')!='OH')
+df1.show()
+
+li = ['OH', 'NY']
+
+filter_df = df.filter(df.State.isin(li)).sort(col('State'), asc=False)
+filter_df.show()
+
+filter_df1 = df.filter(df.State.startswith('O'))
+filter_df1.show()
+
+filter_df2 = df.filter(col('State').startswith('O'))
+filter_df2.show()
+'''
+
