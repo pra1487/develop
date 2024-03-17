@@ -16,6 +16,8 @@ sc.setLogLevel('error')
 7. filters on df, select columns
 8. withColumn coalesce cast
 9. split, size, concat_ws 
+10. distinct, dropDups, sort
+11. empty df, StructType
 """
 
 df = spark.read.csv('file:///D://data/Book1.csv', header=True)
