@@ -46,4 +46,11 @@ filter_df1.show()
 
 filter_df2 = df.filter(col('State').startswith('O'))
 filter_df2.show()
+
+df2 = df.withColumn("java_present", array_contains(col('lang'), 'Java'))
+df2.show()
+
+df3 = df.where(array_contains(col('lang'), 'Java'))
+df3.show()
+
 '''
