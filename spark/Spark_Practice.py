@@ -11,7 +11,12 @@
 10. distinct, dropDups, sort
 11. empty df, StructType, lit, explode
 12. pivot, union, regexp_replace, translate
-
+13. avg, max, min, first, last, avg, count, sum, sum_distinct, count_distinct, approx_count_distinct, collect_list, collect_set
+14. substring
+15. to_timestamp, to_date, year, month, dayofmonth
+16. translate, split
+17. rename multiple columns
+18. jdbc read from spark
 """
 
 import pyspark
