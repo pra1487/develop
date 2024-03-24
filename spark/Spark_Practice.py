@@ -28,3 +28,9 @@ spark = SparkSession.builder.appName('Practice').master('local[*]').getOrCreate(
 sc = spark.sparkContext
 sc.setLogLevel('error')
 
+empty_rdd = sc.emptyRDD()
+
+cols = 'name string, is int, age int, dept string'
+
+df = spark.createDataFrame(empty_rdd, cols)
+df.show()
