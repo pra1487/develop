@@ -33,3 +33,13 @@ myUDF = udf(lambda z: conCase(z), StringType())
 
 df1 = df.withColumn('name', myUDF(col('name')))
 df1.show()
+
+def upstr(x):
+    return x.upper()
+
+# convert fun to udf
+
+upperStr_udf = udf(lambda z: upstr(z), StringType())
+
+df2 = df.withColumn('name', upperStr_udf(col('name')))
+df2.show()
