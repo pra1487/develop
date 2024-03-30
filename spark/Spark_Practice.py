@@ -44,5 +44,4 @@ df1 = df.withColumn('address', when(col('address').endswith('Rd'), regexp_replac
                     .otherwise(col('address')))
 df1.show()
 
-df2 = df1.withColumn('address', translate(col('address'), 'JMS', '123'))
-df2.show()
+df2 = df.withColumn('address', expr("case when address "))
