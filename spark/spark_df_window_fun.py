@@ -27,5 +27,9 @@ columns = ["employee_name", "department", "salary"]
 df = spark.createDataFrame(simpleData, columns)
 df.show()
 
-df1 = df.withColumn('dense_rank', dense_rank().over(window_spc)).withColumn('rank', rank().over(window_spc)).
+df1 = df.withColumn('dense_rank', dense_rank().over(window_spc))\
+    .withColumn('rank', rank().over(window_spc))\
+    .withColumn("row_number", row_number().over(window_spc))
 df1.show()
+
+
