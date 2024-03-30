@@ -17,6 +17,7 @@
 16. translate, split
 17. rename multiple columns
 18. jdbc read from spark
+19. window func,
 """
 
 import pyspark
@@ -24,7 +25,24 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
-spark = SparkSession.builder.appName('Practice').master('local[*]').getOrCreate()
+spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
 sc = spark.sparkContext
-sc.setLogLevel('error')
+sc.setLogLevel('Error')
 
+address = [(1,"14851 Jeffrey Rd","Delaware"),
+    (2,"43421 Margarita St","New York"),
+    (3,"13111 Siemon Ave","California")]
+
+cols = 'id int, address string, state string'
+
+df = spark.createDataFrame(address, cols)
+df.show()
+
+df1 = df.withColumn('address', when(col('address').endswith('Rd'), regexp_replace(col('address'), 'Rd', 'Road'))\
+                    .when(col('address').endswith('St'), regexp_replace(col('address'), 'St', 'Street'))\
+                    .when(col('address').endswith('Ave'), regexp_replace(col('address'), 'Ave', 'Avenue'))\
+                    .otherwise(col('address')))
+df1.show()
+
+df2 = df1.withColumn('address', translate(col('address'), 'JMS', '123'))
+df2.show()
