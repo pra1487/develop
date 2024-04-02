@@ -49,5 +49,5 @@ web_df = df1.select(col('nationality').alias('nationality'),
                     col('version'))
 #web_df.show(10)
 
-web_df.write.mode('overwrite').format('parquet').save('D://data/Writedata/web_api/')
+web_df.write.mode('overwrite').format('csv').option('header',True).save('D://data/Writedata/web_api/csv/')
 
