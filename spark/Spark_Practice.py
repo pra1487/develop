@@ -25,23 +25,30 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
-spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
+spark = SparkSession.builder.appName('practice_udf').master('local[*]').getOrCreate()
 sc = spark.sparkContext
 sc.setLogLevel('Error')
 
-address = [(1,"14851 Jeffrey Rd","Delaware"),
-    (2,"43421 Margarita St","New York"),
-    (3,"13111 Siemon Ave","California")]
+emp = [(1,"Smith",-1,"2018","10","M",3000), \
+    (2,"Rose",1,"2010","20","M",4000), \
+    (3,"Williams",1,"2010","10","M",1000), \
+    (4,"Jones",2,"2005","10","F",2000), \
+    (5,"Brown",2,"2010","40","",-1), \
+      (6,"Brown",2,"2010","50","",-1) \
+  ]
 
-cols = 'id int, address string, state string'
+cols = ["emp_id","name","superior_emp_id","year_joined", \
+       "emp_dept_id","gender","salary"]
 
-df = spark.createDataFrame(address, cols)
-df.show()
+emp_df = spark.createDataFrame(emp, cols)
+emp_df.show(2, False)
 
-df1 = df.withColumn('address', when(col('address').endswith('Rd'), regexp_replace(col('address'), 'Rd', 'Road'))\
-                    .when(col('address').endswith('St'), regexp_replace(col('address'), 'St', 'Street'))\
-                    .when(col('address').endswith('Ave'), regexp_replace(col('address'), 'Ave', 'Avenue'))\
-                    .otherwise(col('address')))
-df1.show()
+dept = [("Finance",10), \
+    ("Marketing",20), \
+    ("Sales",30), \
+    ("IT",40) \
+  ]
+deptCols = ["dept_name","dept_id"]
 
-df2 = df.withColumn('address', expr("case when address "))
+dep_df = spark.createDataFrame(dept, deptCols)
+dep_df.show()
