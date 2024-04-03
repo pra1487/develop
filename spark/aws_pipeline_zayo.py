@@ -6,7 +6,9 @@ from pyspark import SparkFiles
 from urllib.request import urlopen
 
 
-spark  = SparkSession.builder.appName('AWS pipe line').master('local[*]').getOrCreate()
+spark  = SparkSession.builder.appName('AWS pipe line').master('local[*]').\
+    config('spark.jars', 'file:///C://Users/Prasad/Downloads/mysql-connector-java-5.1.38.jar').getOrCreate()
+
 sc = spark.sparkContext
 sc.setLogLevel('Error')
 
@@ -16,11 +18,11 @@ url = "https://randomuser.me/api/0.8/?results=200"
 jd = urlopen(url).read().decode('utf-8')
 rdd = sc.parallelize([jd])
 df = spark.read.json(rdd)
-df.show()
+#df.show()
 
 df1 = df.withColumn('results', explode(col('results')))
-df1.show(4)
-df1.printSchema()
+#df1.show(4)
+#df1.printSchema()
 
 web_df = df1.select(col('nationality').alias('nationality'),
                     col('results.user.cell').alias('cell'),
@@ -47,7 +49,4 @@ web_df = df1.select(col('nationality').alias('nationality'),
                     col('results.user.username').alias('username'),
                     col('seed'),
                     col('version'))
-#web_df.show(10)
-
-web_df.write.mode('overwrite').format('csv').option('header',True).save('D://data/Writedata/web_api/csv/')
-
+web_df.show(10)
