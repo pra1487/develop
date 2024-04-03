@@ -20,3 +20,41 @@
 19. window func, web api data process
 """
 
+import pyspark
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+from urllib.request import urlopen
+
+spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
+sc = spark.sparkContext
+sc.setLogLevel('error')
+
+simpleData = [("James", "Sales", 3000),
+    ("Michael", "Sales", 4600),
+    ("Robert", "Sales", 4100),
+    ("Maria", "Finance", 3000),
+    ("James", "Sales", 3000),
+    ("Scott", "Finance", 3300),
+    ("Jen", "Finance", 3900),
+    ("Jeff", "Marketing", 3000),
+    ("Kumar", "Marketing", 2000),
+    ("Saif", "Sales", 4100)
+  ]
+
+cols = 'name string, dept string, salary int'
+
+df = spark.createDataFrame(simpleData, cols)
+#df.show()
+df.createOrReplaceTempView('emp_table')
+
+df1 = spark.sql("select t.* from(select *, dense_rank() over(partition by dept order by salary desc) as dnsrnk from emp_table) as t where dnsrnk = 2")
+df1.show()
+
+from pyspark.sql.window import Window
+
+window_1 = Window.partitionBy('dept').orderBy(col('salary').desc())
+
+df2 = df.withColumn('dnsrnk', dense_rank().over(window_1)).filter(col('dnsrnk')==2)
+df2.show()
+

@@ -10,6 +10,8 @@ sc.setLogLevel('error')
 
 window_spc = Window.partitionBy('department').orderBy('salary')
 
+window_1 = Window.partitionBy('dept').orderBy(col('salary').desc())
+
 simpleData = (("James", "Sales", 3000), \
               ("Michael", "Sales", 4600), \
               ("Robert", "Sales", 4100), \
