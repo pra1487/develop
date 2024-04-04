@@ -48,13 +48,7 @@ df = spark.createDataFrame(simpleData, cols)
 #df.show()
 df.createOrReplaceTempView('emp_table')
 
-df1 = spark.sql("select t.* from(select *, dense_rank() over(partition by dept order by salary desc) as dnsrnk from emp_table) as t where dnsrnk = 2")
-df1.show()
+df3 = df.groupby('dept').count().sort('count', ascending=False)
+df3.show()
 
-from pyspark.sql.window import Window
-
-window_1 = Window.partitionBy('dept').orderBy(col('salary').desc())
-
-df2 = df.withColumn('dnsrnk', dense_rank().over(window_1)).filter(col('dnsrnk')==2)
-df2.show()
 
