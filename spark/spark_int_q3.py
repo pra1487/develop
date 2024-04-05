@@ -12,7 +12,7 @@ df.show(truncate=False)
 
 # Handeling Null values
 
-df_all_null_rmv = df.na.drop() # dropping all null.
+df_all_null_rmv = df.na.drop(how = 'all') # dropping all null.
 df_all_null_rmv.show()
 
 df_drop_any = df.na.drop(how='any')
