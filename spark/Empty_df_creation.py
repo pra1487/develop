@@ -17,3 +17,14 @@ columns = StructType([
 
 df = spark.createDataFrame(empty_rdd, schema=columns)
 df.show()
+
+# ways of creating dataFrames
+
+"""
+1. spark.read
+2. spark.createDataFrame
+3. spark.table()
+4. spark.range(5)
+5. sc.parallelize(list())  from local list rdd
+
+"""
