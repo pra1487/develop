@@ -78,5 +78,8 @@ spark-UI:
         On disk - the data is always kept in serialized format
         on RAM - the data is kept in deserialized format.
 
+cache spark table :
+
+    spark.sql("cache table db.table_name")
 
 """

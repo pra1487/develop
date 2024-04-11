@@ -46,3 +46,37 @@ There are two possibilities to create executors:
         - So, Totaly we are having 29 Executors.
 
 """
+
+"""
+If we have a file in hdfs with 10.1gb size then start processing.
+
+    - 81 partitions in our dataframe with default block size of 128mb
+
+we requested 4 executors:
+    - each one should have 5 cpu cores and 21gb RAM.
+    - Total 20 CPU core and 84gb RAM.
+    
+    - here total 20 parallel task can able to run.
+    - we are having 81 tasks to complete it.
+    - 20 tasks will be complete in parallel in 10secs for example
+    - 20 tasks will be in 10secs same as remaining as well.
+    - 80 tasks will be done in 40secs
+    - last 1 task can done in next 10 or less time.
+    - So, total process will be done in 50decs around.
+    
+to check the spark default parallalisam:
+    - spark.sparkContext.defaultParallelism
+
+to check the dynamic resouce status:
+--------------------------------------
+    - Go to the environment tab in spark UI then search with dynamic then see the below configs.        
+        spark.dynamicAllocaion.enabled = True
+        spark.dynamicAllocation.maxExecutors = 10
+        spark.dynamicAllocation.minexecutors = 2
+    
+to check the number of partitions on the dataframe:
+---------------------------------------------------
+        print(sc.defaultParallelism)
+        print(df.rdd.getNumPartitions())
+
+"""
