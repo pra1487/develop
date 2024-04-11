@@ -47,6 +47,8 @@ There are two possibilities to create executors:
 
 """
 
+# =======================================================
+
 """
 If we have a file in hdfs with 10.1gb size then start processing.
 
@@ -82,6 +84,8 @@ to turn off the dynamic resource allocation:
             .config('spark.executor.instances', '2')\
             .config('spark.executor.cores', '2')\
             .config('spark.executor.memory', '2g')\
+            
+        - here, we can not be request the resources beyond the capacity scheduler matrix of the cluster.
       
 to check the number of partitions on the dataframe:
 ---------------------------------------------------
