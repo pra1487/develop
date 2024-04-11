@@ -48,4 +48,35 @@ persist: it will give little more flexible with respective to memory and disk lo
         - when we will do the cache or persist then we can able to see the results on "storage" tab on spark UI (when is the application is running)
         - we can not able to see this results after complete the job in history server.
 
+spark-UI:
+---------
+        - we can able to see the cache results in storage tab of the spark UI.
+        - cache is lazy, so waiting for the action call.
+
+                order_df_cached = orders_df.cache()
+
+        - show is an action to display the first 20 rows of the df, so, spark will cache that 20 records of the dataframe.
+        - if will do count action, then all the partitions will be cached.
+        - if we will not assign to another variable then it will works like a .show() then it will cached the first partition.
+
+            df.select('order_id', 'order_status').filter("order_status == 'closed'").cache()
+
+        - if we need to cache the total filtered dataframe then needs to execute a count() action.
+
+        - this is cached in storage level Memory Deserialized 1x Replicated.
+
+        - if the Analyzed Logical plans are not same then that will not consider the cached data.
+
+        serialized:
+                    Binary format (which will be more optiized in terms of space, will take less space to store)
+                    in takes extra cpu cycles for the format conversion.
+
+        Deserialized:
+                    Keeping it in object form, takes slightly more space
+                    in terms of computation it is fast
+
+        On disk - the data is always kept in serialized format
+        on RAM - the data is kept in deserialized format.
+
+
 """
