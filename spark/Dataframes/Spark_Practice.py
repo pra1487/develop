@@ -49,6 +49,7 @@ df = spark.createDataFrame(simpleData, cols)
 df.createOrReplaceTempView('emp_table')
 
 df3 = df.groupby('dept').count().sort('count', ascending=False)
-df3.show()
+#df3.show()
 
-
+print(sc.defaultParallelism)
+print(df.rdd.getNumPartitions())
