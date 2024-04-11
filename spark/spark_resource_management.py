@@ -12,8 +12,8 @@ for example,
    - we have 10 worker nodes, each node is having 16 CPU cores and 64gb RAM.
    - here 1 node can hold morethan one executor.
 
-There are two possibilities to create executors
------------------------------------------------
+There are two possibilities to create executors:
+------------------------------------------------
     1. Thin executor
         - intention is to create more number of executors with minimul resources.
         - we can create 15 executors from each node in above example.
