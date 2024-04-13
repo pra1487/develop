@@ -40,6 +40,7 @@ Normal join vs Broadcast Join:
 To check the autoBroadcastJoinThreshold size with below conf.
 
     > spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
+    > 10mb
 
 By default it is 10mb
 
@@ -60,7 +61,13 @@ TO enable to broadcast join:
     > spark.conf.set('spark.sql.autoBroadcastJoinThreshold', '10485760b')
     > orders_df.join(customer_df, orders_df.customer_id == customer_df.customer_id, 'inner')
 
-
+- If the data set is less than 10mb size, than the data can be fit in driver machine to do the broadcast in all the executors.
+    Otherwise drive thrown OOM error.
+- than, the driven knows where the other table is sitting.
+- Now, spark will do the BroadcastExchange on smaller table before going to do the join.
+- After the broadcasting happen, spark will do the BroadcastHashJoin
+- So, the initial data shuffle was not happened.
+-
 
 
 
