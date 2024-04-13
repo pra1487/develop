@@ -30,6 +30,37 @@ orders_df.groupBy('orders_status').count().write.format('csv').mode('overwrite')
 after the above local aggregation, we have 9 different keys, so each key count will go to one partition.
 So, 9 partitions will consume the data, remaining 191 would be empty.
 
+-  it is putting unnecessary overburden on task scheduler to process the empty partitions.
+-
+
+
+Normal join vs Broadcast Join:
+==============================
+
+To check the autoBroadcastJoinThreshold size with below conf.
+
+    > spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
+
+By default it is 10mb
+
+which means, if any of the dataframe or table size is lesser than 10mb then spark will go and do the broadcast join.
+
+To disable the broadcast join:
+
+    > spark.conf.set('spark.sql.autoBroadcastJoinThreshold', '-1')
+    > orders_df.join(customer_df, orders_df.customer_id == customer_df.customer_id, 'inner')
+
+- Here, the shuffle sort sortMergeJoin happens.
+- because, here three stages will create, stage-1 is for read csv(orders), stage-2 is for read customers and then stage-3 is for join.
+- in this join we have disabled the broadcast join config, so in the stage-1 most of the required data shuffle will be happen.
+- then state-2 will have the next shuffle happen. then the stage-3 will be having the joining process.
+
+TO enable to broadcast join:
+
+    > spark.conf.set('spark.sql.autoBroadcastJoinThreshold', '10485760b')
+    > orders_df.join(customer_df, orders_df.customer_id == customer_df.customer_id, 'inner')
+
+
 
 
 
