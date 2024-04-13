@@ -56,5 +56,23 @@ new_orders_df.write \
 .save('orders_gz')
 
 
+new_orders_df.write \
+.format('csv') \
+.mode('overwrire') \
+.option('codec', 'snappy') \
+.save('orders_snappy')
+
+
+let's consider scenario-3:
+==========================
+
+        - we are having multiple files in input location.
+        - how the spark will calculate initial number of partitions.
+        - if the input location is having 100 files with each 50mb then spark will create 50 partitions.
+            due to not exceeds the partition size of 128mb
+        - in this process, spark will merge two two files into one partition.
+
+
+
 
 """
