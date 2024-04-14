@@ -31,7 +31,35 @@ To check the AQE enabled or not:
     > spark.conf.set("spark.sql.adaptive.enabled", True)
 
 
+Optimizing two large tables with bucketing:
+-------------------------------------------
+Bucketing:
+===========
 
+    - Bucketing will work based on hash functioning.
+
+    > orders_df.write.mode("overwrite")\
+                    .bucketBy(8, "customer_id")\
+                    .sortBy('customer_id')\
+                    .option("path", "path")\
+                    .saveAsTable("orders_tab")
+
+    - Actually, Initial number of partitions of orders_df is 9 and our required number of buckets are 8
+        so, each partition will convert into 8 buckets
+        so, total number of buckets are now 72.
+
+
+        > customers_df.write.mode("overwrite")\
+                    .bucketBy(8, "customer_id")\
+                    .sortBy('customer_id')\
+                    .option("path", "path")\
+                    .saveAsTable("customer_tab")
+
+        > spark.sql("select * from orders_tab inner join customers_tab on orders_tab.customer_id == customers_tab.customer_id")\
+            .write.format('noop').mode('overwrite').save
+
+    - In this join, there will be no shuffle happen because both side bucket to bucket is having same customer_id informaton.
+    - so, this is the good approach to join two large tables.
 
 
 """
