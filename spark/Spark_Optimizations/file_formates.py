@@ -35,6 +35,8 @@ Row base file data storage:
     -> If there will be a huge number of columns, then read subset of columns is not efficient.
     ->
 
+- Snappy is the default compression technique for all the file formats.
+
 ex: csv
 
 Column Base file data storage:
@@ -66,9 +68,55 @@ XML and Json:
 Specialized file formats:
 -------------------------
 
-        1. Parquet
-        2. ORC
-        3. AVRO
+        1. Parquet - column base - splittable
+        2. ORC (Optimized row columnar)- column base - splittable
+        3. AVRO - row base - splittable
+
+-All the above formats are splittable and supports schema evolution.
+-We can use any kind of compression technique with the above formats.
+-Metadata also embedded with data and compression codec also mentioned in metadata.
+
+
+* Avro:
+        - It is row based format, will support faster writes but slower reads.
+        - Avro can be fit for landing layer of the data lake because we will always read all the columns in this area.
+        - If we will open the file, metadata can be readable but data will be displayed as binary format.
+
+* ORC and parquet:
+        - Column based file formats.
+        - Not efficient for writes.
+        - Optimized for reads.
+        - Highly efficient for storage.
+        - We can use any type of compression easily why because same type of data stores togather.
+        - ORC best with HIVE
+        - Parquet is default and best with spark.
+
+    -> Parquet:
+        - format contains like header, body , tail.
+        - header is like name
+        - body contains - row groups -> column chunks -> pages
+        - footer - metadata
+        - lets consider one folder is having 4 parquet files.
+            - one file is with 500mb - 80,000 rows
+
+                - 1st row group - 20,000
+                    column chunk1 - order_id
+                    column chunk2 - order_date
+                    column chunk3 - customer_id
+                    column chunk4 - order_status
+
+                - 2nd row group - 20,000
+                    same as above
+
+                - 3rd row group - 20,000
+                    same
+                -4th row group - 20,000
+                    same
+
+    here each column chunk is having actual data along with metadata like total count, min and max count like.
+
+    So, a parquet file  -> row groups (128mb generally) -> column chunks -> pages with some metadata.
+                            also having some metadat like pages.
 
 
 """
