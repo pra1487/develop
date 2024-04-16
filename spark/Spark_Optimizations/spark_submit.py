@@ -11,8 +11,8 @@ spark-submit \
     prog1.py
 
 Note: - If the driver run on one of the worker node that will be the cluster mode.
-      - If the driver will run on the gate way node that will be the client mode.
-      - by deafult that will be consider client mode.
+      - If the driver will run on the gateway node that will be the client mode.
+      - by default that will consider client mode.
 
       - The configurations will be given in the SparkSession as well.
       - SparkSession configs will be the first preference

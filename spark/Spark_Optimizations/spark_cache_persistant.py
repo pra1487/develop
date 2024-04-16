@@ -32,7 +32,7 @@ then for the df4 execution, spark will use the cached df3 to make it faster.
 
 Notes:
     - we should cache the data frame which can be reuse
-    - we should not cache the large data frame because it may not be fit in memory, so we can cache the medioum level data frames which can easily fit into memory
+    - we should not cache the large dataframe because it may not be fit in memory, so we can cache the medioum level data frames which can easily fit into memory
     - cache is lazy, so cache will happen after call an action only.
 
 cache default levels:
