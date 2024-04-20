@@ -28,3 +28,11 @@ df.show(3)
 
 df1 = df.withColumnRenamed('txnno_1', 'txnno_2').withColumnRenamed('txndate_1','txndate_2').withColumnRenamed('city_1','city_2')
 df1.show(3)
+
+# Another way
+
+new_cols = list(map(lambda x: x+'_1', df.columns))
+print(new_cols)
+
+new_df = df.toDF(*new_cols)
+new_df.show()

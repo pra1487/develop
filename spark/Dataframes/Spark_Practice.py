@@ -21,14 +21,23 @@
 """
 
 import pyspark
-import pandas as pd
-from urllib.request import urlopen
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from pyspark.sql.window import Window
+import pandas as pd
+from urllib.request import urlopen
 
 spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
 sc = spark.sparkContext
 sc.setLogLevel('error')
 
+from pyspark.sql.window import Window
+
+df = spark.read.csv('file:///D://data/txns.txt', header=True)
+#df.show()
+
+new_cols = list(map(lambda x: x+'_1', df.columns))
+print(new_cols)
+
+new_df = df.toDF(*new_cols)
+new_df.show()
