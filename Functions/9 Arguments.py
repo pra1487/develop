@@ -8,7 +8,8 @@
 
 """
 
-# 1. Non-Default Arguments: Arguments specified in the function definition and Argument values compulsorily we need to specify with in the function call.
+# 1. Non-Default Arguments: Arguments specified in the function definition
+# and Argument values compulsorily we need to specify with in the function call.
 
 def display(x,y):
     z = x+y

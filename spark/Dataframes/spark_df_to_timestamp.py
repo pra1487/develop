@@ -23,7 +23,8 @@ df1.show()
 df1.printSchema()
 
 df2 = df1.withColumn("date", to_date(col('time_stamp')))\
-    .withColumn('year', year(col('date'))).withColumn('month', month(col('date')))\
+    .withColumn('year', year(col('date')))\
+    .withColumn('month', month(col('date')))\
     .withColumn('day', dayofmonth(col('date')))
 df2.show()
 df2.printSchema()
