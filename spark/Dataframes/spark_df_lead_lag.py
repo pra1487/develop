@@ -22,7 +22,7 @@ data = (("James", "Sales", 3000), \
 cols = "name string, dept string, salary int"
 
 df = spark.createDataFrame(data, cols)
-#df.show()
+df.show()
 
 from pyspark.sql.window import Window
 
