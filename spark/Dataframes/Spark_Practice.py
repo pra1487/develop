@@ -3,7 +3,7 @@
 2. df creation
 3. groupby, agg, collect_list, count, sum, alias
 4. withColumn, withColumnRenamed, when-otherwise
-5. null drop (how = any) (how = 'any', thresh=2) (how='any', subset=[])
+5. null drop (how = 'any') (how = 'any', thresh=2) (how='any', subset=[])
 6. null fill (value=0)(value='')
 7. filters on df, select columns
 8. withColumn coalesce cast
@@ -20,24 +20,20 @@
 19. window func, web api data process
 """
 
-import pyspark
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
-import pandas as pd
-from urllib.request import urlopen
+def prime_check():
+    num = int(input('enter number here: '))
+    flag = False
 
-spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
-sc = spark.sparkContext
-sc.setLogLevel('error')
+    if num>1:
+        for i in range(2,num):
+            if num%i == 0:
+                flag = True
+                break
+            else:
+                flag = False
 
-from pyspark.sql.window import Window
-
-df = spark.read.csv('file:///D://data/txns.txt', header=True)
-#df.show()
-
-new_cols = list(map(lambda x: x+'_1', df.columns))
-print(new_cols)
-
-new_df = df.toDF(*new_cols)
-new_df.show()
+    if flag:
+        print(f"{num} is not prime")
+    else:
+        print("{} is prime".format(num))
+prime_check()
