@@ -3,7 +3,7 @@
 2. df creation
 3. groupby, agg, collect_list, count, sum, alias
 4. withColumn, withColumnRenamed, when-otherwise
-5. null drop (how = any) (how = 'any', thresh=2) (how='any', subset=[])
+5. null drop (how = 'any') (how = 'any', thresh=2) (how='any', subset=[])
 6. null fill (value=0)(value='')
 7. filters on df, select columns
 8. withColumn coalesce cast
@@ -20,36 +20,20 @@
 19. window func, web api data process
 """
 
-import pyspark
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import *
-from pyspark.sql.types import *
-from urllib.request import urlopen
+def prime_check():
+    num = int(input('enter number here: '))
+    flag = False
 
-spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
-sc = spark.sparkContext
-sc.setLogLevel('error')
+    if num>1:
+        for i in range(2,num):
+            if num%i == 0:
+                flag = True
+                break
+            else:
+                flag = False
 
-simpleData = [("James", "Sales", 3000),
-    ("Michael", "Sales", 4600),
-    ("Robert", "Sales", 4100),
-    ("Maria", "Finance", 3000),
-    ("James", "Sales", 3000),
-    ("Scott", "Finance", 3300),
-    ("Jen", "Finance", 3900),
-    ("Jeff", "Marketing", 3000),
-    ("Kumar", "Marketing", 2000),
-    ("Saif", "Sales", 4100)
-  ]
-
-cols = 'name string, dept string, salary int'
-
-df = spark.createDataFrame(simpleData, cols)
-#df.show()
-df.createOrReplaceTempView('emp_table')
-
-df3 = df.groupby('dept').count().sort('count', ascending=False)
-#df3.show()
-
-print(sc.defaultParallelism)
-print(df.rdd.getNumPartitions())
+    if flag:
+        print(f"{num} is not prime")
+    else:
+        print("{} is prime".format(num))
+prime_check()
