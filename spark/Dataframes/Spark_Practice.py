@@ -20,20 +20,38 @@
 19. window func, web api data process
 """
 
-def prime_check():
-    num = int(input('enter number here: '))
-    flag = False
+import pyspark
+import pandas as pd
+from urllib.request import urlopen
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
 
-    if num>1:
-        for i in range(2,num):
-            if num%i == 0:
-                flag = True
-                break
-            else:
-                flag = False
+spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
+sc = spark.sparkContext
+sc.setLogLevel('Error')
 
-    if flag:
-        print(f"{num} is not prime")
-    else:
-        print("{} is prime".format(num))
-prime_check()
+data1 = [("James","Sales","NY",90000,34,10000), \
+    ("Michael","Sales","NY",86000,56,20000), \
+    ("Robert","Sales","CA",81000,30,23000), \
+    ("Maria","Finance","CA",90000,24,23000) \
+  ]
+
+data2 = [("James","Sales","NY",90000,34,10000), \
+    ("Maria","Finance","CA",90000,24,23000), \
+    ("Jen","Finance","NY",79000,53,15000), \
+    ("Jeff","Marketing","CA",80000,25,18000), \
+    ("Kumar","Marketing","NY",91000,50,21000) \
+  ]
+
+cols = 'emp_name string, depart string, state string, Salary long, age int, bonus int'
+
+
+df1 = spark.createDataFrame(data1, cols)
+df2 = spark.createDataFrame(data2, cols)
+
+union_df = df1.unionAll(df2)
+print(union_df.count())
+
+union_df1 = df1.union(df2)
+print(union_df1.count())
