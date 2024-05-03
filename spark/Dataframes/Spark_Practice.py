@@ -20,20 +20,13 @@
 19. window func, web api data process
 """
 
-def prime_check():
-    num = int(input('enter number here: '))
-    flag = False
+s = "This is prasad"
 
-    if num>1:
-        for i in range(2,num):
-            if num%i == 0:
-                flag = True
-                break
-            else:
-                flag = False
+def rw(x):
+    wl = x.split()
+    wl.reverse()
 
-    if flag:
-        print(f"{num} is not prime")
-    else:
-        print("{} is prime".format(num))
-prime_check()
+    result = " ".join(wl)
+    return result
+
+print(rw(s))
