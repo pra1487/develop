@@ -20,6 +20,8 @@
 19. window func, web api data process
 """
 
+l = [[1,2],['virat', 24], 45,'prasad', ['dhoni', 'pandya']]
+
 
 
 
