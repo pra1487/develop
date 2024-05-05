@@ -20,19 +20,13 @@
 19. window func, web api data process
 """
 
-li = ['dhoni200', 'pandya40','jaddu50','virat10','rahul30']
+st = [('virat',60),('dhoni',40),('surya',65),('sachin',70)]
 
-def sort_li(x):
-    rl = []
-    for i in x:
-        c = ""
-        for j in i:
-            if(j.isdigit()):
-                c += j
-        rl.append([int(c), i])
-    rl.sort(key=lambda x: x[0])
-    return [x[1] for x in rl]
-print(sort_li(li))
-
-
-
+def func(li):
+    if len(li)==0:
+        return []
+    else:
+        max_marks = max(marks for name, marks in li)
+        result = [(name, marks) for name, marks in li if marks==max_marks]
+        return result
+print(func(st))
