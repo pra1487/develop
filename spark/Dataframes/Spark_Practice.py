@@ -20,13 +20,17 @@
 19. window func, web api data process
 """
 
-st = [('virat',60),('dhoni',40),('surya',65),('sachin',70)]
+in_li = [1,2,3,[4,[5,6,[8,9]]]]
 
-def func(li):
-    if len(li)==0:
-        return []
-    else:
-        max_marks = max(marks for name, marks in li)
-        result = [(name, marks) for name, marks in li if marks==max_marks]
-        return result
-print(func(st))
+def flat_li(li):
+    fl = []
+
+    for i in li:
+        if (type(i) is list):
+            fl.extend(flat_li(i))
+        else:
+            fl.append(i)
+
+    return fl
+
+print(flat_li(in_li))
