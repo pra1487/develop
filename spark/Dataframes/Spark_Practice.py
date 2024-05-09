@@ -7,7 +7,8 @@
 6. null fill (value=0)(value='')
 7. filters on df, select columns
 8. withColumn coalesce cast
-9. split, size, concat_ws 
+9. split, size, concat_ws
+\+
 10. distinct, dropDups, sort
 11. empty df, StructType, lit, explode
 12. pivot, union, regexp_replace, translate
@@ -20,17 +21,3 @@
 19. window func, web api data process
 """
 
-in_li = [1,2,3,[4,[5,6,[8,9]]]]
-
-def flat_li(li):
-    fl = []
-
-    for i in li:
-        if (type(i) is list):
-            fl.extend(flat_li(i))
-        else:
-            fl.append(i)
-
-    return fl
-
-print(flat_li(in_li))
