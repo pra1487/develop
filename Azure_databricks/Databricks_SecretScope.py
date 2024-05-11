@@ -90,13 +90,16 @@ Now go to databricks to add this secret key:
 Now we can check with dbutils:
     - dbutils.secrets.get('databricks_secretscope_dev', 'storage_dev_key')
         out: "[REDICATED]"
-        which means,
 
+Now we can use this in mount command:
 
+    -dbutils.fs.mount(source = 'wasbs://input_datasets@pp_storage_dev.blob.core.windows.net',
+                    mount_point = '/mnt/retaildb',
+                    extra_configs = {'fs.azure.account.key.pp_storage_dev.blob.core.windows.net':
+                    dbutils.secrets.get('databricks_secretscope_dev','storage_dev_key')})
 
-
-
-
+    - df = spark.read.csv('/mnt/retaildb/orders.csv', header=True)
+    - df.show()
 
 
 
