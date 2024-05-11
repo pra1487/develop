@@ -2,21 +2,23 @@
 Secret Scope:
 =============
 
+There are two ways to manage secrets.
+
+        1. Azure key vault backed secret scope: - Recommended
+        2. Databricks backed secret scope:
+
+
 1. Azure key vault backed secret scope: - Recommended
 ---------------------------------------
      - keep the keys in azure key vault and connect with databricks secret scope.
      - Any other Azure resources can also able to use the keys while keeping the keys in Azure key vault.
      - That is way, this is recommended.
 
+Process:
+--------
 
-2. Databricks backed secret scope:
-----------------------------------
-    - Databricks don't take azure support.
-    - Keys are keeping with encrypted databricks database
-
-
-Azure Key vault:
-----------------
+    Azure Key vault:
+    ----------------
     - create key vault service
     - set both permissions in Access Control (IAM)
 
@@ -46,13 +48,33 @@ Azure Key vault:
                                     --> search with 'key vault' in search bar in job "function roles"
                                     --> select "Key Vault Administrator" bigger level permission.
                                         or
-                                        select Key Vault Secret User - Read secret contents. only works for key vaults
+                                        select "Key Vault Secret User" - Read secret contents. only works for key vaults
                                         'Azure role-based access control' -- recommended for databricks.
                                     --> click on 'next'
                                     --> click on '+ Select members'
                                     --> Type AzureDatabricks in search bar in which opened on right side panel
                                     --> click on 'select' on same panel
                                     --> click on 'review + assign'
+Now creating secrets:
+--------------------
+    - Process:
+            Open key vault --> click on secrets in setting section.
+                            --> click on "Generate/import"
+                            --> enter the details as shown in below
+                                    * Upload option = 'manual' is fine
+                                    * Name = '' (Our choice)
+                                    * Value = (secret key)
+                                    * Content type =
+                                    * Set activation date =
+                                    * Set expire date =
+                                    * Enabled =
+                            --> click on "Create"
+
+
+2. Databricks backed secret scope:
+----------------------------------
+    - Databricks don't take azure support.
+    - Keys are keeping with encrypted databricks database
 
 
 """
