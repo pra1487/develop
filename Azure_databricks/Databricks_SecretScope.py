@@ -62,13 +62,42 @@ Now creating secrets:
                             --> click on "Generate/import"
                             --> enter the details as shown in below
                                     * Upload option = 'manual' is fine
-                                    * Name = '' (Our choice)
+                                    * Name = 'storage_dev_key' (Our choice)
                                     * Value = (secret key)
                                     * Content type =
                                     * Set activation date =
                                     * Set expire date =
                                     * Enabled =
                             --> click on "Create"
+
+Now go to databricks to add this secret key:
+--------------------------------------------
+  - There is a hidden scope available in databricks
+  - we can able to store many secrets.
+
+  - Process:
+              --> type "#secrets/createScope" in the url of the databricks to navigate the panel
+              --> enter Scope Name ex. databricks_secretscope_dev
+              --> enter DNS name
+              --> enter resource ID
+                    --> go to 'key vault' resource
+                    --> click on 'properties'
+                    --> copy the 'Vault URL'
+                    --> copy the 'Resource ID'
+              --> click on 'create'
+
+
+Now we can check with dbutils:
+    - dbutils.secrets.get('databricks_secretscope_dev', 'storage_dev_key')
+        out: "[REDICATED]"
+        which means,
+
+
+
+
+
+
+
 
 
 2. Databricks backed secret scope:
