@@ -61,8 +61,46 @@ Notebook utility:
         - exit(value:string) : This method lets you exit a notebook with value.
         - run(path: string, timeoutSeconds:int, arguments:Map) : This method runs a notebook and returns its exit value.
 
+dbutils.notebook.run('/users/trendytech.sumit@outlook.com/childnotebook',60)
 
 
+widgets utility:
+----------------
+                    dbutils.widgets.help()
+        - combobox -->
+        - dropdown
+        - multiselect
+        - text
+
+dbutils.widgets.combobox(name='order_status', defaultValue='CLOSED', choices=['CLOSED','COMPLETE','PROCESSING',]
+                        label='ORDER STATUS')
+    -> we can either select a value from the existing dropdown or can type in your value.
+
+How to use this:
+
+                df = spark.read.csv('dbfs:/FileStore/retaildata/orders.csv', header=True)
+                os = dbutils.widgets.get('order_status')
+
+                df.where("order_status == '{}'".format(os)).show()
+
+                # this will filter the df.
+
+
+dbutils.widgets.dropdown(name='orderstatus', defaultValue='CLOSED', choices=['CLOSED','COMPLETE','PROCESSING',]
+                        label='ORDER STATUS')
+    -> we can not able to enter/type the required text, only need to select from dropdown list.
+
+
+dbutils.widgets.multiselect(name='orderstatus', defaultValue='CLOSED', choices=['CLOSED','COMPLETE','PROCESSING',]
+                        label='ORDER STATUS')
+    -> we can select more than one dropdown list.
+
+dbutils.widgets.text(name='orderstatus',defaultValue='CLOSED', label='ORDER STATUS')
+    -> we can just enter/type any value as per our requirement
+
+
+dbutils.widgets.remove('orderstatus')
+dbutils.widgets.removeAll()
 
 
 
