@@ -81,23 +81,76 @@ _delta_log
 00001.json
 
     - Two more files will be append to te target location
+    - now total 7 part files are generated.
     - one more json log file will be create
     - If the append process will fail than the json log file won't be create.
 
+Operation-2 one more append:
+---------------------------
+part-008.parquet
 
+_delta_log
+00003.json
 
+    - Now total 8 part files are generated
+    - 3 json log files are generated.
 
+for read process:
+-----------------
+    -> spark will read first json log files.
+    -> read the required part files based on the json log file.
 
+DML operations:
+---------------
 
+updates:
+--------
+    data files:
+                part-000.parquet
+                part-001.parquet
+                part-002.parquet
+                part-003.parquet
+                part-004.parquet
+    _delta_log:
+                00000.json
+                -----------
+                add part-000.parquet
+                add part-001.parquet
+                add part-002.parquet
+                add part-003.parquet
+                add part-004.parquet
 
+emp_id, emp_name, salary -> are the data cols in parquet files.
+101, kohli, 10000
+102, mahi, 11000
+101, shoni, 12000
 
+update table set salary = 15000 where emp_id = 101;
+Than new part file will create with new change
+New json log file also create.
 
+part-005.parquet
+----------------
+101, kohli, 15000
+102, mahi, 11000
+101, shoni, 12000
 
+    new data files:
+                part-001.parquet
+                part-002.parquet
+                part-003.parquet
+                part-004.parquet
+                part-005.parquet
+    _delta_log:
+        00001.json:
+                    add part-005.parquet
+                    remove part-000.parquet
 
+Same thing happened for delete records as well.
 
+When we will read the data from this logfile, we will get the updated data.
 
-
-
-
-
+- Schema changes also taken care
+- Version history also.
+-
 """
