@@ -1,4 +1,4 @@
-    x = "Hellow world This Python IS VERY gooD For CAREEr"
+x = "Hellow world This Python IS VERY gooD For CAREEr"
 
 def count(x):
 
