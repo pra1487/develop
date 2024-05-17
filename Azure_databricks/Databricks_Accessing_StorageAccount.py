@@ -17,7 +17,7 @@ Accessing Storage Account:
 
 2. SAS Key:
 -----------
-    -> We can able to control container level access.
+    -> We can control container level access.
     -> We have better security level than Access Key
     -> There is no Access Key option available in container level.
 

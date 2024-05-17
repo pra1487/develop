@@ -7,7 +7,7 @@ li = [1,2,3,4,5,6,8,4,1,6,10]
 
 
 def func(li):
-    """Printing odd numbers which are before odd numbers"""
+    """Printing even numbers which are before odd numbers"""
     rl = []
 
     for i in range(len(li)-1):
