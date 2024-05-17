@@ -9,7 +9,7 @@ storage account name : pp_storage_dev
 container name : input_datasets
 files: orders.csv, customer.csv
 
-to mount: dbutils.fs.mount(source, mount_point, extrac configs)
+to mount: dbutils.fs.mount(source, mount_point, extra configs)
 
     source = 'wasbs://input_datasets@pp_storage_dev.blob.core.windows.net'
     mount_point = '/mnt/retaildb'
