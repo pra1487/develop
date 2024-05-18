@@ -10,8 +10,8 @@ sc.setLogLevel('error')
 df = spark.read.csv('file:///D://data/book1.csv', header=True)
 df.show()
 
-df1 = df.select([count(i) for i in df.columns])
+df1 = df.select([count(i).alias(i+'(Total_Cnt)') for i in df.columns])
 df1.show()
 
-df2 = df.select([count(when(col(i).isNull(), i)).alias('Null_count') for i in df.columns])
+df2 = df.select([count(when(col(i).isNull(), i)).alias(i+"(Null_cnt)") for i in df.columns])
 df2.show()
