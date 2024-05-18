@@ -8,7 +8,6 @@
 7. filters on df, select columns
 8. withColumn coalesce cast
 9. split, size, concat_ws
-\+
 10. distinct, dropDups, sort
 11. empty df, StructType, lit, explode
 12. pivot, union, regexp_replace, translate
