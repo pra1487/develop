@@ -31,9 +31,6 @@ spark = SparkSession.builder.appName('Practice').master('local[*]').getOrCreate(
 sc = spark.sparkContext
 sc.setLogLevel('error')
 
-data = ["1,Virat\t35|Bangalore"]
-
-df = spark.createDataFrame(data, "string")
+df = spark.range(1,11).toDF("Numbers")
 df.show()
-
-split_col = split(df.value, ',|\t|\|')
+df.printSchema()
