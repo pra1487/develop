@@ -4,6 +4,8 @@ from pyspark.sql.functions import *
 from pyspark.sql.window import Window
 from pyspark.sql import Row
 
+""" Finding rolling average """
+
 spark = SparkSession.builder.appName('interview').master('local[*]').getOrCreate()
 sc = spark.sparkContext
 sc.setLogLevel('error')
