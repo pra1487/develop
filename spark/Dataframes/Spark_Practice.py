@@ -31,6 +31,5 @@ spark = SparkSession.builder.appName('Practice').master('local[*]').getOrCreate(
 sc = spark.sparkContext
 sc.setLogLevel('error')
 
-df = spark.range(1,11).toDF("Numbers")
+df = spark.read.parquet('file:///D://data/Writedata/19May2024/string/')
 df.show()
-df.printSchema()
