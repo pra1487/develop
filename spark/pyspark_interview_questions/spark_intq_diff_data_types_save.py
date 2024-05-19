@@ -27,3 +27,4 @@ for i in data_types_set:
             cols.append(j[0])
     df.select(cols).write.mode('overwrite').save(f'D://data/Writedata/19May2024/{i}')
 
+
