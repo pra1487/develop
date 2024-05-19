@@ -51,7 +51,3 @@ from pyspark.sql.window import Window
 my_wind = Window.partitionBy('Dept').orderBy(col('Bonus').desc())
 my_wind2 = Window.orderBy(col('Bonus'))
 
-df2 = df.withColumn('next_sal', lag('Bonus',1).over(my_wind2)).withColumn('Bonus_diff', (col('Bonus')-col('next_sal')))\
-    .withColumn('new_col', lit('new_val').cast(StringType()))
-df2.show()
-
