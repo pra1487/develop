@@ -7,7 +7,7 @@
 6. null fill (value=0)(value='')
 7. filters on df, select columns
 8. withColumn coalesce cast
-9. split, size, concat_ws 
+9. split, size, concat_ws
 10. distinct, dropDups, sort
 11. empty df, StructType, lit, explode
 12. pivot, union, regexp_replace, translate
@@ -19,21 +19,17 @@
 18. jdbc read from spark
 19. window func, web api data process
 """
+import pyspark
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+import pandas as pd
+from urllib.request import urlopen
 
-def prime_check():
-    num = int(input('enter number here: '))
-    flag = False
 
-    if num>1:
-        for i in range(2,num):
-            if num%i == 0:
-                flag = True
-                break
-            else:
-                flag = False
+spark = SparkSession.builder.appName('Practice').master('local[*]').getOrCreate()
+sc = spark.sparkContext
+sc.setLogLevel('error')
 
-    if flag:
-        print(f"{num} is not prime")
-    else:
-        print("{} is prime".format(num))
-prime_check()
+df = spark.read.parquet('file:///D://data/Writedata/19May2024/string/')
+df.show()

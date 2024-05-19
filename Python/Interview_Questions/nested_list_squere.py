@@ -22,3 +22,19 @@ print(sq_li(l))
 
 res = [[int(math.pow(j,2)) for j in i] for i in l]
 print(res)
+
+li = [1, [2, [3, [4, [5, [6, [7, [8, 9]]]]]]]]
+
+
+def func(li):
+    rl = []
+    for i in li:
+        if type(i) == list:
+            rl.extend([func(i)])
+        else:
+            rl.append(i ** 2)
+
+    return rl
+
+
+print(func(li))
