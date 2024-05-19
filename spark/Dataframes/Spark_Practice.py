@@ -31,23 +31,9 @@ spark = SparkSession.builder.appName('Practice').master('local[*]').getOrCreate(
 sc = spark.sparkContext
 sc.setLogLevel('error')
 
-data = [("James", "Sales", 3000),
-    ("Michael", "Sales", 4600),
-    ("Robert", "Sales", 4100),
-    ("Maria", "Finance", 3000),
-    ("James", "Sales", 3000),
-    ("Scott", "Finance", 3300),
-    ("Jen", "Finance", 3900),
-    ("Jeff", "Marketing", 3000),
-    ("Kumar", "Marketing", 2000),
-    ("Saif", "Sales", 4100)
-  ]
+data = ["1,Virat\t35|Bangalore"]
 
-cols = 'Name string, Dept string, Bonus int'
+df = spark.createDataFrame(data, "string")
+df.show()
 
-df = spark.createDataFrame(data, cols)
-
-from pyspark.sql.window import Window
-my_wind = Window.partitionBy('Dept').orderBy(col('Bonus').desc())
-my_wind2 = Window.orderBy(col('Bonus'))
-
+split_col = split(df.value, ',|\t|\|')
