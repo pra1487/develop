@@ -41,9 +41,9 @@ let's consider scenario-3:
         - single Non-Splittable file.
         - if some time csv will compressed with snappy or gzip then that file will be not splittable.
         - parquest is splittable with snappy.
-        - S0, if the csv file comes with the above compression then that will bot be splittable
-            then spark will be consider as a single partition only.
-            - If the execution memory is not sufficiant to process the above file, will throw the OOM issue.
+        - So, if the csv file comes with the above compression then that will not be splittable
+            then spark will be considered as a single partition only.
+            - If the execution memory is not sufficient to process the above file, will throw the OOM issue.
 
 orders_df.rdd.getNumPartitions()
 new_orders_df = orders_df.repartition(1)
