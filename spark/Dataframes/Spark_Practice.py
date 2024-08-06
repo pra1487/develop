@@ -19,29 +19,15 @@
 18. jdbc read from spark
 19. window func, web api data process
 """
-
 import pyspark
 from pyspark.sql import SparkSession
-from pyspark.sql import Row
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
+from pyspark.sql.window import Window
 from urllib.request import urlopen
-
 
 spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
 sc = spark.sparkContext
-sc.setLogLevel('error')
+sc.setLogLevel('Error')
 
-columns = ["name","languagesAtSchool","currentState"]
 
-data = [("James,,Smith",["Java","Scala","C++"],"CA"), \
-    ("Michael,Rose,",["Spark","Java","C++"],"NJ"), \
-    ("Robert,,Williams",["CSharp","VB"],"NV")]
-
-df = spark.createDataFrame(data, columns)
-df.show()
-
-df1 = df.withColumn('fname', split(col('name'), ',')[0])\
-    .withColumn('lname', when(split(col('name'),',')[1]=='', split(col('name'),',')[2])\
-                .otherwise(split(col('name'),',')[1]))
-df1.show()
