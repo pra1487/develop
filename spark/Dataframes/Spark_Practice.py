@@ -30,4 +30,7 @@ spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate(
 sc = spark.sparkContext
 sc.setLogLevel('Error')
 
+dict1 = {'country':'pak', 'country':'india'}
+country = dict1['country']
+print(country)
 
