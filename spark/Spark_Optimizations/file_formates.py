@@ -6,12 +6,12 @@ File formats and compression techniques:
 Why do we need different file formats:
 
         - we want to save storage
-        - we want tom make faster process
+        - we want to make faster process
         - we want less time for I/O operations
 
 So, there are lot more file formats available for choose.
 
-The below are the consideration tp select the right formats.
+The below are the consideration to select the right formats.
 
     -> Faster Reads
     -> Faster Writes
@@ -44,7 +44,7 @@ Column Base file data storage:
 1,2,3 | 2023-07-23 00:00:00,2023-04-28 00:00:00,2024-01-26 00:00:00 | 11956,254756, 124356 |CLOSED, PENDING, CLOSED
 
     -> Efficient in reads.
-    ->
+    -> There is a flexibility to read subset of columns from all the columns.
 
 ex: parquet
 

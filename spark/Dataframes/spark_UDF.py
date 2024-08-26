@@ -40,6 +40,5 @@ def upstr(x):
 # convert fun to udf
 
 upperStr_udf = udf(lambda z: upstr(z), StringType())
-
 df2 = df.withColumn('name', upperStr_udf(col('name')))
 df2.show()

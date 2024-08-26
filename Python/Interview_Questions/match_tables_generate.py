@@ -1,6 +1,9 @@
-def table(x,y):
+def run():
 
-    for i in range(1,y+1):
-        print(f"{x}*{i}={i*x}")
+    table_num = int(input("Please enter the table number:"))
+    table_range = int(input('Please enter the table range:'))
 
-table(3,10)
+    for i in range(1,table_range+1):
+        print(f"{table_num}*{i}={i*table_num}")
+
+run()
