@@ -19,17 +19,28 @@
 18. jdbc read from spark
 19. window func, web api data process
 """
+
 import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-import pandas as pd
 from urllib.request import urlopen
 
+spark = SparkSession.builder.master('local[*]').appName('Interview').getOrCreate()
 
-spark = SparkSession.builder.appName('Practice').master('local[*]').getOrCreate()
-sc = spark.sparkContext
-sc.setLogLevel('error')
+data = [Row(UserID=1, PurchaseDate='2023-01-05'),
+        Row(UserID=1, PurchaseDate='2023-01-10'),
+        Row(UserID=2, PurchaseDate='2023-01-03'),
+        Row(UserID=3, PurchaseDate='2023-01-12')]
 
-df = spark.read.parquet('file:///D://data/Writedata/19May2024/string/')
-df.show()
+sales_df = spark.createDataFrame(data)
+sales_df.show()
+
+from pyspark.sql.window import Window
+
+my_window = Window.partitionBy('UserID').orderBy('PurchaseDate')
+
+df = sales_df.withColumn('dense_rank', dense_rank().over(my_window))
+
+result_df = df.filter(col('dense_rank')==1).drop('dense_rank')
+result_df.show()

@@ -59,7 +59,7 @@ Bucketing:
             .write.format('noop').mode('overwrite').save
 
     - In this join, there will be no shuffle happen because both side bucket to bucket is having same customer_id informaton.
-    - so, this is the good approach to join two large tables.
+    - so, this is the good approach to join two large tables. m 
 
 
 """

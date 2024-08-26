@@ -17,3 +17,4 @@ df1.show()
 df2 = df1.withColumn('street', col('json_col').street.alias('Street'))\
     .withColumn('city', col('json_col').city.alias('City'))
 df2.show()
+

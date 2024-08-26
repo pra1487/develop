@@ -14,7 +14,7 @@ let's consider scenario-1:
         - we have 1.1gb of file
         - we have 2 executors with 1gb RAM and 1 CPU core.
     Now partition size will be min(128mb, 1.1gb/2) = min(9, 2)
-    So, now spaek will create 9 number of initial partitions while creating the dataframe on 1.1gb dof data file
+    So, now spark will create 9 number of initial partitions while creating the dataframe on 1.1gb dof data file
 
 spark.sql.files.maxPartitionsBytes = 128m
 
@@ -41,9 +41,9 @@ let's consider scenario-3:
         - single Non-Splittable file.
         - if some time csv will compressed with snappy or gzip then that file will be not splittable.
         - parquest is splittable with snappy.
-        - S0, if the csv file comes with the above compression then that will bot be splittable
-            then spark will be consider as a single partition only.
-            - If the execution memory is not sufficiant to process the above file, will throw the OOM issue.
+        - So, if the csv file comes with the above compression then that will not be splittable
+            then spark will be considered as a single partition only.
+            - If the execution memory is not sufficient to process the above file, will throw the OOM issue.
 
 orders_df.rdd.getNumPartitions()
 new_orders_df = orders_df.repartition(1)

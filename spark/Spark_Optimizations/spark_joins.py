@@ -1,5 +1,5 @@
 """
-Internals of groupby():
+Internals of groupBy():
 ======================
 
 orders_df = spark.read.format('csv').schema(orders_schema).load("file:///D://data/orders_1gb.csv")
@@ -13,7 +13,7 @@ orders_df.groupBy('orders_status').count().write.format('csv').mode('overwrite')
 - remaining 191 partitions will be empty.
 - if there will be 400 different keys in the order_status, then all the 200 partitions will be having some data.
 
-- local aggregation will be happen before shuffle the data.
+- local aggregation will be happened before shuffle the data.
 - which means
 
     p1: closed-2000
@@ -42,7 +42,7 @@ To check the autoBroadcastJoinThreshold size with below conf.
     > spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
     > 10mb
 
-By default it is 10mb
+By default, it is 10mb
 
 which means, if any of the dataframe or table size is lesser than 10mb then spark will go and do the broadcast join.
 
