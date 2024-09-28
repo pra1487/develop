@@ -6,7 +6,7 @@ spark = SparkSession.builder.appName('df_filters').master('local[*]').getOrCreat
 sc = spark.sparkContext
 sc.setLogLevel('error')
 
-""" To find the customer who are oder all the products"""
+""" To find the customer who are order all the products"""
 
 prod_data = [(5,), (6,)]
 prod_cols = "product_key int"

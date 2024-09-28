@@ -11,6 +11,7 @@ def word_count(x):
         else:
             counts[i]=1
     return counts
+
 x = word_count(s)
 for i in x.items():
     print(i[0], i[1])
