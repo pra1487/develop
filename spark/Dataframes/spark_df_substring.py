@@ -7,7 +7,7 @@ spark = SparkSession.builder.appName('spark df substring').master('local[*]').ge
 sc = spark.sparkContext
 sc.setLogLevel('Error')
 
-data = data = [(1,"20200828"),(2,"20180525")]
+data = [(1,"20200828"),(2,"20180525")]
 
 columns=["id","date"]
 
