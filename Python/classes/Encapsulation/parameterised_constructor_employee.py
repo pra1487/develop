@@ -12,7 +12,7 @@ class employe:
         self.details = details
         employe.empcount = employe.empcount+1
     def display(self):
-        print('Name=',self.empname,'ID=',self.empid, 'Salary=',self.empsal,'Langs=',self.languages,'Details=',self.details)
+        print('Name=',self.empname,'\nID=',self.empid,'\nSalary=',self.empsal,'\nLangs=',self.languages,'\nDetails=',self.details,)
 
 emp1 = employe('Virat',101,12000,'SA','ENG','HINDI', age=37, city='BANG')
 emp1.display()
