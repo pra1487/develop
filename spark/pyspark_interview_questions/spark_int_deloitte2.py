@@ -7,7 +7,7 @@ from pyspark.sql.window import Window
 spark = SparkSession.builder.appName('intq').master('local[*]').getOrCreate()
 
 data = [('IT', 'M'),('IT', 'F'),('IT', 'M'),('IT', 'M'),
-        ('HR', 'F'),('HR', 'F'),('HR', 'F'),('HR', 'F'),('HR', 'F'),
+        ('HR', 'F'),('HR', 'M'),('HR', 'F'),('HR', 'F'),('HR', 'M'),
         ('Sales', 'M'),('Sales', 'F'),('Sales', 'M'),('Sales', 'F'),('Sales', 'M'),('Sales', 'M')]
 cols = ['DeptName', 'Gender']
 

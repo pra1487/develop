@@ -7,11 +7,16 @@ from urllib.request import urlopen
 
 spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
 
-rdd1 = spark.sparkContext.textFile('file:///D://data/hello.txt')
-rdd2 = rdd1.flatMap(lambda x: x.split(' '))
-rdd3 = rdd2.map(lambda x: (x,1))
-rdd4 = rdd3.reduceByKey(lambda x,y: x+y)
-rdd5 = rdd4.repartition(4)
-print(rdd5.getNumPartitions())
-df = spark.createDataFrame(rdd5, schema='name string, count int')
-df.show()
+prod_data = [(5,), (6,)]
+prod_cols = "product_key int"
+prod_df = spark.createDataFrame(prod_data, prod_cols)
+
+
+
+
+
+
+
+
+
+
