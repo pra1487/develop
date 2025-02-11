@@ -2,23 +2,23 @@ import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-
-from datetime import date
 from urllib.request import urlopen
+from datetime import date
+from pyspark.sql.window import Window
 
-spark = SparkSession.builder.appName('practice').master('local[*]').getOrCreate()
+spark = SparkSession.builder.master('local[*]').appName('practice').getOrCreate()
+sc = spark.sparkContext
+sc.setLogLevel('Error')
 
-url = "https://randomuser.me/api/0.8/?results=200"
+data = [('IT', 'M'),('IT', 'F'),('IT', 'M'),('IT', 'M'),
+        ('HR', 'F'),('HR', 'M'),('HR', 'F'),('HR', 'F'),('HR', 'M'),
+        ('Sales', 'M'),('Sales', 'F'),('Sales', 'M'),('Sales', 'F'),('Sales', 'M'),('Sales', 'M')]
+cols = ['DeptName', 'Gender']
 
-url_open = urlopen(url).read().decode('utf-8')
-url_rdd = spark.sparkContext.parallelize([url_open])
-url_df = spark.read.json(url_rdd)
-url_df.printSchema()
+df = spark.createDataFrame(data, cols)
+df.show()
 
-url_df = url_df.withColumn('results', explode(col('results')))
-
-url_df = url_df.select(col('results.user.name.first').alias('first_name'),
-                       col('results.user.name.last').alias('last_name'),
-                       col('results.user.phone').alias('phone'),
-                       col('results.user.email').alias('mail_id'))
-url_df.show(truncate=True)
+df.createOrReplaceTempView('df')
+spark.sql("""select DeptName, count(*) as total_emp_count, sum(female) as female_count, sum(male) as male_count
+          from (select *, case when Gender = 'M' then 1 else 0 end as male, case when Gender = 'F' then 1 else 0 end as female
+          from df) group by DeptName""").show()
