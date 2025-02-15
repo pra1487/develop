@@ -29,3 +29,19 @@ df3.show()
 
 df4 = df3.select('*', ((col('Total_Sale')-col('Prev_month_sale'))*100/col('Total_Sale')).alias('Sales_Percentage'))
 df4.show()
+
+
+"""
+df = spark.createDataFrame(data, schema)
+df.show()
+
+df1 = df.withColumn('SODate', to_date(col('SODate'), 'yyyy-MM-dd'))\
+       .select('SOId', month(col('SODate')).alias('Month'), year(col('SODate')).alias('Year'), 'ItemValue')
+df1.show()
+
+df2 = df1.groupBy('Month', 'Year').agg(sum('ItemValue').alias('Total_sales'))\
+    .withColumn('Prev_sal', lag(col('Total_sales')).over(Window.orderBy('Month')))\
+    .withColumn('sales_percentage', (col('Total_sales')-col('Prev_sal'))/col('Total_sales')*100)
+df2.show()
+
+"""
