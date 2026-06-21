@@ -143,5 +143,20 @@ select *, ascii(email_id) as ascii_email,
 rank() over(partition by email_id order by ascii(email_id) desc) as rnk from employees) result where rnk = 1;
 
 ---------------------------------------
+with flight_details as (
+select f.*, a1.city_name as start_city, a2.city_name as end_city from flights f
+join airports a1 on f.start_port = a1.port_code
+join airports a2 on f.end_port = a2.port_code),
+direct as (
+select start_city as trip_start_city, Null as middle_city, end_city as trip_end_city,flight_id, timestampdiff(minute, start_time, end_time) as time_taken
+from flight_details where start_city = 'New York' and end_city = 'Tokyo')
+select a.start_city as trip_start_city, b.start_city as middle_city, b.end_city as trip_end_city, concat(a.flight_id,';',b.flight_id) as flight_id,
+timestampdiff(minute,a.start_time, b.end_time) as time_taken from
+(select * from flight_details where start_city = 'New York')a
+join
+(select * from flight_details where end_city = 'Tokyo')b
+on a.end_city = b.start_city and b.start_time >= a.end_time
+union all
+select * from direct;
 """
 
