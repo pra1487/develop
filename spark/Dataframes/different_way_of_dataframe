@@ -1,0 +1,27 @@
+#Initialize Spark session ---------------
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+
+#Initialize spark --------
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+sc = spark.sparkContext
+
+from datetime import datetime, timedelta
+import random
+
+base_time = datetime(2026, 9, 23, 0,0,)
+print(base_time)
+
+from pyspark.sql import Row
+
+batch_1 = [
+  Row(event_id = i,
+     event_type = random.choice(['click', 'view', 'purchases']),
+      user_id = random.randint(100,199),
+      event_ts = base_time+timedelta(seconds=i*30)
+     ) for i in range(1,11)
+]
+
+df = spark.createDataFrame(batch_1)
+df.show()
